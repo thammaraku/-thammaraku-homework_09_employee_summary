@@ -14,6 +14,116 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+
+const managerQuestions = [
+
+    {
+        type: "input",
+        name: "teamName",
+        message: "Please enter team name",
+        default: "My Team"
+    },
+
+    {
+        type: "input",
+        name: "name",
+        message: "Please enter manager name",
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+
+    {
+        type: "input",
+        name: "id",
+        message: "Please enter employee ID",
+        // Todo: Need to add test here to make sure the input is number
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+
+    {
+        type: "input",
+        name: "email",
+        message: "Please enter manager's email address",
+        // Todo: Need to add test here to make sure the input is email
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+
+    
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "Please enter manager office number",
+        // Todo: Need to add test here to make sure the input is number
+
+    },
+
+    {
+        type: "input",
+        name: "numberMember",
+        message: "How many team members in the team including you?",
+        // Todo: Need to add test here to make sure the input is number
+
+
+    }
+]
+
+const employeeQuestions = [
+
+    {
+        type: "input",
+        name: "name",
+        message: "Please enter employee name",
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "Please enter email address",
+        // Todo: Need to add test here to make sure the input is email
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+
+    {
+        type: "list",
+        name: "role",
+        message: "What is job role of this team member?",
+        choices: ["Engineer", "Intern"]
+
+    },
+
+    {
+        when: answer => (answer.typeMember) === "Engineer",
+        type: "input",
+        name: "github",
+        message: "Please enter your github username",
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+
+    },
+
+    {
+        when: answer => (answer.typeMember) === "Intern",
+        type: "input",
+        name: "school",
+        message: "Please enter your school name",
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+
+    },
+
+    {
+    type: "list";
+    name: "addMore"
+    message: "Would you like to add another member?",
+    choice: ["Yes", "No"]       
+    }
+
+]
+
+
+
+
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
