@@ -76,12 +76,18 @@ const employeeQuestions = [
     },
     {
         type: "input",
+        name: "id",
+        message: "Please enter employee ID",
+        // Todo: Need to add test here to make sure the input is number
+        validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
+    },
+    {
+        type: "input",
         name: "email",
         message: "Please enter email address",
         // Todo: Need to add test here to make sure the input is email
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
-
     {
         type: "list",
         name: "role",
@@ -109,8 +115,8 @@ const employeeQuestions = [
     },
 
     {
-    type: "list";
-    name: "addMore"
+    type: "list",
+    name: "addMore",
     message: "Would you like to add another member?",
     choice: ["Yes", "No"]       
     }
