@@ -1,15 +1,21 @@
+// Import each role class
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+
+// Import dependencies
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { CLIENT_RENEG_LIMIT } = require("tls");
 
+var teamMembers = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -17,12 +23,11 @@ const render = require("./lib/htmlRenderer");
 
 const managerQuestions = [
 
-    {
-        type: "input",
-        name: "teamName",
-        message: "Please enter team name",
-        default: "My Team"
-    },
+    // {
+    //     type: "input",
+    //     name: "teamName",
+    //     message: "Please enter team name",
+    // },
 
     {
         type: "input",
@@ -43,6 +48,7 @@ const managerQuestions = [
         type: "input",
         name: "email",
         message: "Please enter manager's email address",
+
         // Todo: Need to add test here to make sure the input is email
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
@@ -57,13 +63,12 @@ const managerQuestions = [
     },
 
     {
-        type: "input",
-        name: "numberMember",
-        message: "How many team members in the team including you?",
-        // Todo: Need to add test here to make sure the input is number
+        type: "confirm",
+        name: "mgrAddMember",
+        message: "Would you like to add a team member?",
+        // choices: ["Yes", "No"]
 
-
-    }
+    },
 ]
 
 const employeeQuestions = [
@@ -72,6 +77,7 @@ const employeeQuestions = [
         type: "input",
         name: "name",
         message: "Please enter employee name",
+
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
     {
@@ -85,6 +91,7 @@ const employeeQuestions = [
         type: "input",
         name: "email",
         message: "Please enter email address",
+
         // Todo: Need to add test here to make sure the input is email
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
@@ -95,40 +102,81 @@ const employeeQuestions = [
         choices: ["Engineer", "Intern"]
 
     },
-
     {
-        when: answer => (answer.typeMember) === "Engineer",
+        when: answer => (answer.role) === "Engineer",
         type: "input",
         name: "github",
         message: "Please enter your github username",
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
 
     },
-
     {
-        when: answer => (answer.typeMember) === "Intern",
+        when: answer => (answer.role) === "Intern",
         type: "input",
         name: "school",
         message: "Please enter your school name",
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
 
     },
-
     {
-    type: "list",
+    type: "confirm",
     name: "addMore",
     message: "Would you like to add another member?",
-    choice: ["Yes", "No"]       
     }
 
 ]
 
 
+function addTeamMembers () {
 
+    inquirer
+        .prompt(managerQuestions)
+        .then(answer => {
 
+            var teamManager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+            teamMembers.push(teamManager);
+            console.log(teamMembers);
 
+            console.log(answer.mgrAddMember);
+            if (answer.mgrAddMember === true) {
+                addMoreTeamMembers ();
+            } else {
+                render(teamMembers);
+            }
 
+        })
 
+}
+
+function addMoreTeamMembers () {
+
+    inquirer
+        .prompt(employeeQuestions)
+        .then(answer => {
+
+            console.log(answer.role);
+            if (answer.role === "Engineer") {
+                var newMember = new Engineer(answer.name, answer.id, answer.email, answer.github);
+            } else if (answer.role === "Intern") {
+                var newMember = new Intern(answer.name, answer.id, answer.email, answer.school);
+            }
+
+            teamMembers.push(newMember);
+            console.log(teamMembers);
+
+            console.log(answer.addMore);
+            if (answer.addMore === true) {
+                addMoreTeamMembers();
+            } else {
+                render(teamMembers);
+            }
+
+          })
+
+}
+
+// EXECUTION
+addTeamMembers ();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
