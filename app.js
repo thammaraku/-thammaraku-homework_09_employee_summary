@@ -53,7 +53,7 @@ const managerQuestions = [
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
 
-    
+
     {
         type: "input",
         name: "officeNumber",
@@ -119,15 +119,15 @@ const employeeQuestions = [
 
     },
     {
-    type: "confirm",
-    name: "addMore",
-    message: "Would you like to add another member?",
+        type: "confirm",
+        name: "addMore",
+        message: "Would you like to add another member?",
     }
 
 ]
 
 
-function addTeamMembers () {
+function addTeamMembers() {
 
     inquirer
         .prompt(managerQuestions)
@@ -137,24 +137,24 @@ function addTeamMembers () {
             teamMembers.push(teamManager);
             console.log(teamMembers);
 
-            console.log(answer.mgrAddMember);
+            // console.log(answer.mgrAddMember);
             if (answer.mgrAddMember === true) {
-                addMoreTeamMembers ();
+                addMoreTeamMembers();
             } else {
-                render(teamMembers);
+                renderTeamHtml(teamMembers);
             }
 
         })
 
 }
 
-function addMoreTeamMembers () {
+function addMoreTeamMembers() {
 
     inquirer
         .prompt(employeeQuestions)
         .then(answer => {
 
-            console.log(answer.role);
+            // console.log(answer.role);
             if (answer.role === "Engineer") {
                 var newMember = new Engineer(answer.name, answer.id, answer.email, answer.github);
             } else if (answer.role === "Intern") {
@@ -164,19 +164,62 @@ function addMoreTeamMembers () {
             teamMembers.push(newMember);
             console.log(teamMembers);
 
-            console.log(answer.addMore);
+            // console.log(answer.addMore);
             if (answer.addMore === true) {
                 addMoreTeamMembers();
             } else {
-                render(teamMembers);
+                renderTeamHtml(teamMembers);
             }
-
-          })
+        })
 
 }
 
+function useTemplate(role, name, id, email, specialInfo) {
+
+    let card =fs.readFileSync(`./templates/${role}.html`,'utf8')
+    card = card.replace("name", name);
+    card = card.replace("role", role);
+    card = card.replace("id", id);
+    card = card.replace("emailLink", email);
+    card = card.replace("emailAddress", email);
+    card = card.replace("officeNumber",specialInfo);
+    card = card.replace("gitHubLink",specialInfo);
+    card = card.replace("gitHubAccount",specialInfo);
+    card = card.replace("school",specialInfo);
+
+
+    fs.appendFileSync(outputPath, card, err => {if (err) throw err;})
+    console.log ("card appended");
+}
+
+function renderTeamHtml(teamMembers) {
+
+    let main = fs.readFileSync("./templates/main.html");
+    fs.writeFileSync(outputPath, main, function (err) {
+        if (err) throw (err);
+    });
+
+    for (member of teamMembers) {
+
+        if (member.getRole() === "Manager") {
+            useTemplate("Manager", member.getName(), member.getId(), member.getEmail(), member.getOfficeNumber());
+        }
+        else if (member.getRole() == "Engineer") {
+            useTemplate("Engineer", member.getName(), member.getId(), member.getEmail(), member.getGithub());
+        }
+        else if (member.getRole() == "Intern") {
+            useTemplate("Intern", member.getName(), member.getId(), member.getEmail(), member.getSchool());
+        }
+    }
+
+    fs.appendFileSync(outputPath, `<!-- ${member.getRole()} added -->`, function (err) {
+        if (err) throw err;
+    });
+}
+
+
 // EXECUTION
-addTeamMembers ();
+addTeamMembers();
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
