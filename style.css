@@ -1,8 +1,7 @@
 .list-group-item2 {
 	width: 95%;
-  margin: 1%;
-  list-style-type: none;
-
+	margin: 1%;
+	list-style-type: none;
 }
 
 @media (min-width: 576px) {
@@ -19,10 +18,20 @@
 	}
 }
 
-@media (min-width: 992px) {
-	.list-group-item2 {
-		width: 23%;
-		margin: 5px 1%;
-	}
+.jumbotron {
+	background-color: lightcoral;
+	color: white;
 }
 
+.card-header {
+	background-color: dodgerblue;
+	color: white;
+}
+
+.card-body {
+	background-color: snow;
+}
+
+.card {
+	height: 100%;
+}
