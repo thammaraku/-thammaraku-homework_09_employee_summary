@@ -1,0 +1,28 @@
+.list-group-item2 {
+	width: 95%;
+  margin: 1%;
+  list-style-type: none;
+
+}
+
+@media (min-width: 576px) {
+	.list-group-item2 {
+		width: 47%;
+		margin: 5px 1.5%;
+	}
+}
+
+@media (min-width: 768px) {
+	.list-group-item2 {
+		width: 31.333%;
+		margin: 5px 1%;
+	}
+}
+
+@media (min-width: 992px) {
+	.list-group-item2 {
+		width: 23%;
+		margin: 5px 1%;
+	}
+}
+

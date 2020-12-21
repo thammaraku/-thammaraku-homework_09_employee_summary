@@ -187,7 +187,6 @@ function useTemplate(role, name, id, email, specialInfo) {
     card = card.replace("gitHubAccount",specialInfo);
     card = card.replace("school",specialInfo);
 
-
     fs.appendFileSync(outputPath, card, err => {if (err) throw err;})
     console.log ("card appended");
 }
@@ -200,7 +199,6 @@ function renderTeamHtml(teamMembers) {
     });
 
     for (member of teamMembers) {
-
         if (member.getRole() === "Manager") {
             useTemplate("Manager", member.getName(), member.getId(), member.getEmail(), member.getOfficeNumber());
         }
@@ -212,7 +210,7 @@ function renderTeamHtml(teamMembers) {
         }
     }
 
-    fs.appendFileSync(outputPath, `<!-- ${member.getRole()} added -->`, function (err) {
+    fs.appendFileSync(outputPath, "</div></div></div></body></html>", function (err) {
         if (err) throw err;
     });
 }
