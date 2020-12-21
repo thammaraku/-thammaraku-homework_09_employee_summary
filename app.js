@@ -210,7 +210,7 @@ function renderTeamHtml(teamMembers) {
         }
     }
 
-    fs.appendFileSync(outputPath, "</div></div></div></body></html>", function (err) {
+    fs.appendFileSync(outputPath, "</div></div></body></html>", function (err) {
         if (err) throw err;
     });
 }
