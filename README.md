@@ -13,13 +13,10 @@ a Node CLI that takes in information about employees and generates an HTML webpa
 
 ### Github Repository URL
 https://github.com/thammaraku/homework_09_employee_summary
-
 ### Application Screenshot
 ![Application Screenshot](./assets/homework_09_employee_summary.png)
-
 ### Tutorial Video Link
-https://drive.google.com/file/d/1g0VkKf3TioidlkZ4Ba2Wd0x9mpEvvWK6/view?usp=sharing
-
+https://drive.google.com/file/d/111ELPsygtwkX24SZtSY-zgKednwOMdj4/view?usp=sharing
 
 
 ## Knowledge learned from this assignment
