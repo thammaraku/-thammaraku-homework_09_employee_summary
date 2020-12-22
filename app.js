@@ -111,7 +111,6 @@ function addTeamMembers() {
 
             var teamManager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
             teamMembers.push(teamManager);
-            console.log(teamMembers);
 
             if (answer.mgrAddMember === true) {
                 addMoreTeamMembers();
