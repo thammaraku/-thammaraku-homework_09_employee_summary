@@ -32,29 +32,24 @@ const managerQuestions = [
         type: "input",
         name: "id",
         message: "Please enter employee ID",
-        // Todo: Need to add test here to make sure the input is number
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
     {
         type: "input",
         name: "email",
         message: "Please enter manager's email address",
-
-        // Todo: Need to add test here to make sure the input is email
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
     {
         type: "input",
         name: "officeNumber",
         message: "Please enter manager office number",
-        // Todo: Need to add test here to make sure the input is number
 
     },
     {
         type: "confirm",
         name: "mgrAddMember",
         message: "Would you like to add a team member?",
-        // choices: ["Yes", "No"]
 
     },
 ]
@@ -71,15 +66,12 @@ const employeeQuestions = [
         type: "input",
         name: "id",
         message: "Please enter employee ID",
-        // Todo: Need to add test here to make sure the input is number
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
     {
         type: "input",
         name: "email",
         message: "Please enter email address",
-
-        // Todo: Need to add test here to make sure the input is email
         validate: answer => (answer.length < 1) ? console.log("Your input is required") : true
     },
     {
@@ -121,7 +113,6 @@ function addTeamMembers() {
             teamMembers.push(teamManager);
             console.log(teamMembers);
 
-            // console.log(answer.mgrAddMember);
             if (answer.mgrAddMember === true) {
                 addMoreTeamMembers();
             } else {
@@ -141,7 +132,6 @@ function addMoreTeamMembers() {
             }
 
             teamMembers.push(newMember);
-            // console.log(teamMembers);
 
             if (answer.addMore === true) {
                 addMoreTeamMembers();
