@@ -1,29 +1,31 @@
 # Homework 09 - Template Engine - Employee Summary
 
 ## Objective
-to create a command-line application that dynamically generates a professional README.md file from a user's input using the Inquirer package.
-
+a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
 ## Acceptance Criteria
-- The User will be prompted for information about the project, after answered all the questions,
-A high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions.
-- Table of Content will link to each section of README page.
-- User contact information both email and github link will be added to the Questions section.
+- User can use the CLI to generate an HTML page that displays information about their team.
+- Functional application.
+- All tests must pass.
+- GitHub repository with a unique name and a README describing the project.
 
 
 ## Application
 
 ### Github Repository URL
-https://github.com/thammaraku/homework_08_professional_readme_generator
+https://github.com/thammaraku/homework_09_employee_summary
+
+### Application Screenshot
+![Application Screenshot](./assets/homework_09_employee_summary.png)
 
 ### Tutorial Video Link
 https://drive.google.com/file/d/1g0VkKf3TioidlkZ4Ba2Wd0x9mpEvvWK6/view?usp=sharing
 
-### Link to the sample of auto-generated README file
-https://github.com/thammaraku/homework_08_professional_readme_generator/blob/master/project_readme_auto_generated.md
-
 
 
 ## Knowledge learned from this assignment
-1. How to use node to invoke a javascript file
-2. How to use Inquirer package to get information from the user 
-3. How to write a good README file with all the necessary information
+1. How to use constructor and class
+2. How to use Inquirer package to interact and get information from the user 
+3. How to run a test by using jest
+4. How to use multiple HTML templates to compose to a main page
+5. How to use pass date to placeholder HTML
+6. How to use file system package to interact with the files
